@@ -3,27 +3,28 @@ import {
   DrawerForm,
   PageContainer,
   ProFormDigit,
-  ProFormRadio,
+  ProFormRadio, ProFormSelect,
   ProFormText,
   ProFormTextArea,
   ProFormTreeSelect,
   ProTable,
 } from '@ant-design/pro-components';
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components';
-import { Button, message as Message, Popconfirm, Space, Switch, Tag, Tooltip } from 'antd';
-import { useRef, useState } from 'react';
+import type {ActionType, ProColumns, ProFormInstance} from '@ant-design/pro-components';
+import {Button, message as Message, Popconfirm, Space, Switch, Tag, Tooltip} from 'antd';
+import {useRef, useState} from 'react';
 
 import deptApi from '@/services/api/system/dept';
-import { ArrowsAltOutlined, PlusOutlined, ShrinkOutlined } from '@ant-design/icons';
+import {ArrowsAltOutlined, PlusOutlined, ShrinkOutlined} from '@ant-design/icons';
 import {useIntl} from "@@/exports";
 import React from 'react';
+import user from "@/services/api/system/user";
 
 type ColumnItem = {
   id: number; //2,
   parent_id: number; //0,
   level: string; //"0",
   name: string; //"研发部",
-  leader: string; //"李风",
+  leader: any[]; //"李风",
   phone: string; //"15566667777",
   status: number; //1,
   sort: number; //1,
@@ -48,29 +49,25 @@ export default () => {
 
   const columns: ProColumns<ColumnItem>[] = [
     {
-      title: intl.formatMessage({id: 'pages.system.dept.name',defaultMessage: '部门名称',}),
+      title: intl.formatMessage({id: 'pages.system.dept.name', defaultMessage: '部门名称',}),
       dataIndex: 'name',
       width: 300,
     },
     {
-      title: intl.formatMessage({id: 'pages.system.dept.leader',defaultMessage: '负责人',}),
+      title: intl.formatMessage({id: 'pages.system.dept.leader', defaultMessage: '负责人',}),
       dataIndex: 'leader',
+      render: (_, record) => record.leader.map((item: any) => <Tag color="blue" key={item.id}>{item.nickname}</Tag>),
     },
+
     {
-      title: intl.formatMessage({id: 'pages.system.dept.phone',defaultMessage: '手机',}),
-      dataIndex: 'phone',
-      hideInSearch: true,
-      render: (text) => (text !== '-' ? <Tag color="orange">{text}</Tag> : '-'),
-    },
-    {
-      title: intl.formatMessage({id: 'pages.common.sort',defaultMessage: '排序',}),
+      title: intl.formatMessage({id: 'pages.common.sort', defaultMessage: '排序',}),
       key: 'sort',
       dataIndex: 'sort',
       hideInSearch: true,
     },
     {
       disable: true,
-      title: intl.formatMessage({id: 'pages.system.dept.status',defaultMessage: '状态',}),
+      title: intl.formatMessage({id: 'pages.system.dept.status', defaultMessage: '状态',}),
       dataIndex: 'status',
       filters: false,
       onFilter: true,
@@ -78,11 +75,11 @@ export default () => {
       valueType: 'select',
       valueEnum: {
         1: {
-          text: intl.formatMessage({id: 'pages.common.open',defaultMessage: '启用',}),
+          text: intl.formatMessage({id: 'pages.common.open', defaultMessage: '启用',}),
           status: 'Success',
         },
         0: {
-          text: intl.formatMessage({id: 'pages.common.forbiden',defaultMessage: '禁用',}),
+          text: intl.formatMessage({id: 'pages.common.forbiden', defaultMessage: '禁用',}),
           status: 'Error',
         },
       },
@@ -90,18 +87,18 @@ export default () => {
       hideInTable: true,
     },
     {
-      title: intl.formatMessage({id: 'pages.system.dept.status',defaultMessage: '状态',}),
+      title: intl.formatMessage({id: 'pages.system.dept.status', defaultMessage: '状态',}),
       dataIndex: 'status',
       hideInSearch: true,
       render: (text, record) => (
-        <Tooltip title={intl.formatMessage({id: 'pages.common.change_status',defaultMessage: '点击变更状态',})}>
+        <Tooltip title={intl.formatMessage({id: 'pages.common.change_status', defaultMessage: '点击变更状态',})}>
           <Switch
-            checkedChildren={intl.formatMessage({id: 'pages.common.open',defaultMessage: '启用',})}
-            unCheckedChildren={intl.formatMessage({id: 'pages.common.forbiden',defaultMessage: '禁用',})}
+            checkedChildren={intl.formatMessage({id: 'pages.common.open', defaultMessage: '启用',})}
+            unCheckedChildren={intl.formatMessage({id: 'pages.common.forbiden', defaultMessage: '禁用',})}
             defaultChecked={text === 1}
             size="small"
             onChange={async (checked) => {
-              const msg = await deptApi.changeStatus({ id: record.id, status: checked ? 1 : 2 });
+              const msg = await deptApi.changeStatus({id: record.id, status: checked ? 1 : 2});
               if (msg.success) {
                 message.success(msg.message);
               } else {
@@ -113,7 +110,7 @@ export default () => {
       ),
     },
     {
-      title: intl.formatMessage({id: 'pages.common.created_at',defaultMessage: '创建时间',}),
+      title: intl.formatMessage({id: 'pages.common.created_at', defaultMessage: '创建时间',}),
       key: 'created_at',
       dataIndex: 'created_at',
       valueType: 'dateRange',
@@ -121,7 +118,7 @@ export default () => {
       render: (_: any, record: { created_at: any }) => record.created_at,
     },
     {
-      title: intl.formatMessage({id: 'pages.common.action',defaultMessage: '操作',}),
+      title: intl.formatMessage({id: 'pages.common.action', defaultMessage: '操作',}),
       valueType: 'option',
       key: 'option',
       fixed: 'right',
@@ -138,7 +135,7 @@ export default () => {
           }}
           shape="round"
         >
-          {intl.formatMessage({id: 'pages.common.new',defaultMessage: '新建'})}
+          {intl.formatMessage({id: 'pages.common.new', defaultMessage: '新建'})}
         </Button>,
         <Button
           size="small"
@@ -150,13 +147,13 @@ export default () => {
           }}
           shape="round"
         >
-          {intl.formatMessage({id: 'pages.common.edit',defaultMessage: '编辑',})}
+          {intl.formatMessage({id: 'pages.common.edit', defaultMessage: '编辑',})}
         </Button>,
         <Popconfirm
           key="popconfirm"
-          title={intl.formatMessage({id: 'pages.common.confirm_delete',defaultMessage: '确定要删除吗？',})}
+          title={intl.formatMessage({id: 'pages.common.confirm_delete', defaultMessage: '确定要删除吗？',})}
           onConfirm={async () => {
-            const result = await deptApi.deletes({ ids: [record.id] });
+            const result = await deptApi.deletes({ids: [record.id]});
             if (result.success) {
               message.success(result.message);
               actionRef?.current?.reload?.();
@@ -164,11 +161,11 @@ export default () => {
               message.error(result.message);
             }
           }}
-          okText={intl.formatMessage({id: 'pages.common.confirm2',defaultMessage: '确认',})}
-          cancelText={intl.formatMessage({id: 'pages.common.cancel',defaultMessage: '取消',})}
+          okText={intl.formatMessage({id: 'pages.common.confirm2', defaultMessage: '确认',})}
+          cancelText={intl.formatMessage({id: 'pages.common.cancel', defaultMessage: '取消',})}
         >
           <Button size="small" key="delete" danger shape="round">
-            {intl.formatMessage({id: 'pages.common.delete',defaultMessage: '删除',})}
+            {intl.formatMessage({id: 'pages.common.delete', defaultMessage: '删除',})}
           </Button>
         </Popconfirm>,
       ],
@@ -189,11 +186,11 @@ export default () => {
           items: [
             {
               path: '',
-              title: intl.formatMessage({id: 'pages.system.dept.auth',defaultMessage: '权限',}),
+              title: intl.formatMessage({id: 'pages.system.dept.auth', defaultMessage: '权限',}),
             },
             {
               path: '',
-              title: intl.formatMessage({id: 'pages.system.dept.department_manage',defaultMessage: '部门管理',}),
+              title: intl.formatMessage({id: 'pages.system.dept.department_manage', defaultMessage: '部门管理',}),
             },
           ],
         },
@@ -210,21 +207,27 @@ export default () => {
           // selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
           defaultSelectedRowKeys: [],
         }}
-        tableAlertRender={({ selectedRowKeys, onCleanSelected }) => (
+        tableAlertRender={({selectedRowKeys, onCleanSelected}) => (
           <span>
-            {intl.formatMessage({id: 'pages.common.selected',defaultMessage: '已选'})} {selectedRowKeys.length} {intl.formatMessage({id: 'pages.common.items',defaultMessage: '项'})}
-            <Button type="link" style={{ marginInlineStart: 8 }} onClick={onCleanSelected}>
-              {intl.formatMessage({id: 'pages.common.cancel_selected',defaultMessage: '取消选择'})}
+            {intl.formatMessage({
+              id: 'pages.common.selected',
+              defaultMessage: '已选'
+            })} {selectedRowKeys.length} {intl.formatMessage({id: 'pages.common.items', defaultMessage: '项'})}
+            <Button type="link" style={{marginInlineStart: 8}} onClick={onCleanSelected}>
+              {intl.formatMessage({id: 'pages.common.cancel_selected', defaultMessage: '取消选择'})}
             </Button>
           </span>
         )}
-        tableAlertOptionRender={({ selectedRowKeys }) => {
+        tableAlertOptionRender={({selectedRowKeys}) => {
           return (
             <Space size={16}>
               <Popconfirm
-                title={intl.formatMessage({id: 'pages.common.confirm_batch_delete',defaultMessage: '确定要批量删除吗？',})}
+                title={intl.formatMessage({
+                  id: 'pages.common.confirm_batch_delete',
+                  defaultMessage: '确定要批量删除吗？',
+                })}
                 onConfirm={async () => {
-                  const msg = await deptApi.deletes({ ids: selectedRowKeys });
+                  const msg = await deptApi.deletes({ids: selectedRowKeys});
                   if (msg.success) {
                     message.success(msg.message);
                     actionRef.current?.reload?.();
@@ -233,11 +236,15 @@ export default () => {
                   }
                 }}
               >
-                <Button type="link">{intl.formatMessage({id: 'pages.common.batch_delete',defaultMessage: '批量删除'})}</Button>
+                <Button type="link">{intl.formatMessage({
+                  id: 'pages.common.batch_delete',
+                  defaultMessage: '批量删除'
+                })}</Button>
               </Popconfirm>
             </Space>
           );
         }}
+        params={{withRelation: 'leader:id,nickname'}}
         request={async (params = {}, sort) => {
           // 排序
           let sorts = undefined;
@@ -248,7 +255,7 @@ export default () => {
             };
           }
           // 页码
-          params = { page: params.current, ...params };
+          params = {page: params.current, ...params};
           delete params.current;
 
           const result = await deptApi.getList({
@@ -281,7 +288,7 @@ export default () => {
           <Button
             type="default"
             shape="round"
-            icon={expandall ? <ShrinkOutlined /> : <ArrowsAltOutlined />}
+            icon={expandall ? <ShrinkOutlined/> : <ArrowsAltOutlined/>}
             onClick={() => {
               if (!expandall) {
                 setExpandedRowKeys(deptData.map((item) => item.id));
@@ -291,7 +298,10 @@ export default () => {
               setExpandall(!expandall);
             }}
           >
-            {expandall ? intl.formatMessage({id: 'pages.common.zhedie',defaultMessage: '折叠'}) : intl.formatMessage({id: 'pages.common.zhankai',defaultMessage: '展开'})}
+            {expandall ? intl.formatMessage({
+              id: 'pages.common.zhedie',
+              defaultMessage: '折叠'
+            }) : intl.formatMessage({id: 'pages.common.zhankai', defaultMessage: '展开'})}
           </Button>
         }
         expandedRowKeys={expandedRowKeys}
@@ -309,19 +319,22 @@ export default () => {
             key="button"
             type="primary"
             shape="round"
-            icon={<PlusOutlined />}
+            icon={<PlusOutlined/>}
             onClick={() => setFormVisible(true)}
           >
-            {intl.formatMessage({id: 'pages.common.new',defaultMessage: '新建'})}
+            {intl.formatMessage({id: 'pages.common.new', defaultMessage: '新建'})}
           </Button>,
         ]}
-        scroll={{ x: 1500 }}
+        scroll={{x: 1500}}
       />
       <DrawerForm
-        title={row ? intl.formatMessage({id: 'pages.common.edit',defaultMessage: '编辑',}) : intl.formatMessage({id: 'pages.common.add2',defaultMessage: '新增',})}
+        title={row ? intl.formatMessage({
+          id: 'pages.common.edit',
+          defaultMessage: '编辑',
+        }) : intl.formatMessage({id: 'pages.common.add2', defaultMessage: '新增',})}
         width={500}
         layout="horizontal"
-        labelCol={{ span: 5 }}
+        labelCol={{span: 5}}
         open={formVisible}
         onOpenChange={(open) => setFormVisible(open)}
         formRef={formRef}
@@ -358,7 +371,7 @@ export default () => {
             return false;
           }
 
-          message.success(intl.formatMessage({id: 'pages.common.submit_success',defaultMessage: '提交成功',}));
+          message.success(intl.formatMessage({id: 'pages.common.submit_success', defaultMessage: '提交成功',}));
           formRef.current?.resetFields();
           setRow(undefined);
           setParentId(0);
@@ -368,44 +381,68 @@ export default () => {
       >
         <ProFormTreeSelect
           name="parent_id"
-          label={intl.formatMessage({id: 'pages.system.dept.parent_id',defaultMessage: '上级部门',})}
-          placeholder={intl.formatMessage({id: 'pages.system.dept.parent_id_placeholder',defaultMessage: "请选择上级部门",})}
+          label={intl.formatMessage({id: 'pages.system.dept.parent_id', defaultMessage: '上级部门',})}
+          placeholder={intl.formatMessage({
+            id: 'pages.system.dept.parent_id_placeholder',
+            defaultMessage: "请选择上级部门",
+          })}
           fieldProps={{
             treeDefaultExpandAll: true,
           }}
           request={async () =>
-            rebuildMenu([{ id: 0, name: intl.formatMessage({id: 'pages.system.dept.top_department',defaultMessage: '顶级部门',}), children: [] }, ...deptData])
+            rebuildMenu([{
+              id: 0,
+              name: intl.formatMessage({id: 'pages.system.dept.top_department', defaultMessage: '顶级部门',}),
+              children: []
+            }, ...deptData])
           }
         />
         <ProFormText
-          name="name" label={intl.formatMessage({id: 'pages.system.dept.name',defaultMessage: '部门名称',})}
-          tooltip={intl.formatMessage({id: 'pages.common.length_limit_24',defaultMessage: '最长为 24 位',})}
-          placeholder={intl.formatMessage({id: 'pages.system.dept.name_placeholder',defaultMessage: '请输入名称',})}
-          rules={[{ required: true, message: intl.formatMessage({id: 'pages.system.dept.name_placeholder',defaultMessage: '请输入名称',}) }]}
+          name="name" label={intl.formatMessage({id: 'pages.system.dept.name', defaultMessage: '部门名称',})}
+          tooltip={intl.formatMessage({id: 'pages.common.length_limit_24', defaultMessage: '最长为 24 位',})}
+          placeholder={intl.formatMessage({id: 'pages.system.dept.name_placeholder', defaultMessage: '请输入名称',})}
+          rules={[{
+            required: true,
+            message: intl.formatMessage({id: 'pages.system.dept.name_placeholder', defaultMessage: '请输入名称',})
+          }]}
         />
-        <ProFormText name="leader"
-          label={intl.formatMessage({id: 'pages.system.dept.leader',defaultMessage: '负责人',})}
-          placeholder={intl.formatMessage({id: 'pages.system.dept.leader_placeholder',defaultMessage: '请输入负责人',})} />
-        <ProFormText name="phone"
-          label={intl.formatMessage({id: 'pages.system.dept.phone',defaultMessage: '联系电话',})}
-          placeholder={intl.formatMessage({id: 'pages.system.dept.phone_placeholder',defaultMessage: '请输入联系电话',})} />
+        <ProFormSelect name={'leaders'}
+                       label={intl.formatMessage({id: 'pages.system.dept.leader', defaultMessage: '负责人',})}
+                       tooltip={intl.formatMessage({id: 'pages.system.dept.leader.tip'})}
+                       request={async () => {
+                         const response = await user.getOption();
+                         return response.data.map((item: any) => ({label: item.nickname, value: item.id}))
+                       }}
+                       mode={"multiple"}
+                       fieldProps={{
+                         optionFilterProp: 'children',
+                         filterOption: (input: string, option: any) =>
+                           (option?.searchLabel ?? option?.label ?? '').toLowerCase().includes(input.toLowerCase()),
+                         allowClear: true,
+                         showSearch: true,
+                       }}
+        />
         <ProFormDigit name="sort"
-          label={intl.formatMessage({id: 'pages.system.dept.sort',defaultMessage: '排序',})}
-          placeholder={intl.formatMessage({id: 'pages.system.dept.sort_placeholder',defaultMessage: '请输入排序',})} />
+                      label={intl.formatMessage({id: 'pages.system.dept.sort', defaultMessage: '排序',})}
+                      placeholder={intl.formatMessage({
+                        id: 'pages.system.dept.sort_placeholder',
+                        defaultMessage: '请输入排序',
+                      })}/>
         <ProFormRadio.Group
-          name="status" label={intl.formatMessage({id: 'pages.system.dept.status',defaultMessage: '状态',})}
+          name="status" label={intl.formatMessage({id: 'pages.system.dept.status', defaultMessage: '状态',})}
           options={[
             {
-              label: intl.formatMessage({id: 'pages.common.open',defaultMessage: '启用',}),
+              label: intl.formatMessage({id: 'pages.common.open', defaultMessage: '启用',}),
               value: 1,
             },
             {
-              label: intl.formatMessage({id: 'pages.common.forbiden',defaultMessage: '禁用',}),
+              label: intl.formatMessage({id: 'pages.common.forbiden', defaultMessage: '禁用',}),
               value: 2,
             },
           ]}
         />
-        <ProFormTextArea name="remark" label={intl.formatMessage({id: 'pages.system.dept.remark',defaultMessage: '备注',})}  />
+        <ProFormTextArea name="remark"
+                         label={intl.formatMessage({id: 'pages.system.dept.remark', defaultMessage: '备注',})}/>
       </DrawerForm>
     </PageContainer>
   );

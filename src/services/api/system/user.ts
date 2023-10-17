@@ -13,6 +13,14 @@ export default {
     });
   },
 
+  getOption(params = {}) {
+    return request({
+      url: 'system/user/option',
+      method: 'get',
+      params,
+    });
+  },
+
   /**
    * 从回收站获取用户
    * @returns
@@ -167,5 +175,5 @@ export default {
       data,
     });
   },
-  
+
 };

@@ -36,5 +36,7 @@ export default {
   'component.formlist.fields.createbutton':'Add a new Form Field',
   'component.formlist.fields.creategroupbutton':'Add a new Form Group',
 
-  'component.tooltips.no_selecting' : 'Not selecting means all are available'
+  'component.tooltips.no_selecting' : 'Not selecting means all are available',
+
+  'component.refresh.token' : 'The session will expire after {time} . Do you want to retrieve it again?'
 };

@@ -12,7 +12,7 @@ export default {
   'component.form.button.cancel': '取消',
   'component.form.button.ok': '提交',
   'component.form.button.delete': '删除',
-  'component.form.button.tipsdelete': '确定要删除吗？',  
+  'component.form.button.tipsdelete': '确定要删除吗？',
   'component.form.button.batchdelete': '批量删除',
   'component.form.button.tipsbatchdelete': '确定要批量删除吗？',
   'component.form.button.import': '导入',
@@ -35,5 +35,7 @@ export default {
   'component.formlist.fields.createbutton':'增加新的表单项',
   'component.formlist.fields.creategroupbutton':'增加新的表单分组',
 
-  'component.tooltips.no_selecting' : '不选择表示全部可用'
+  'component.tooltips.no_selecting' : '不选择表示全部可用',
+
+  'component.refresh.token' : '本次登录会话将在 {time} 后过期，是否重新获取？'
 };

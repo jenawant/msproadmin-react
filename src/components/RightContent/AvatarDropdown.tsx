@@ -6,15 +6,15 @@ import {
   SettingOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import type { ProFormInstance } from "@ant-design/pro-components";
+import type {ProFormInstance} from "@ant-design/pro-components";
 import {
   DrawerForm,
   ProForm,
   ProFormText,
   ProFormTextArea,
 } from "@ant-design/pro-components";
-import { history, useIntl, useModel } from "@umijs/max";
-import type { MenuProps } from "antd";
+import {history, useIntl, useModel} from "@umijs/max";
+import type {MenuProps} from "antd";
 import {
   App,
   Avatar,
@@ -26,13 +26,13 @@ import {
   Tabs,
   Upload,
 } from "antd";
-import React, { useEffect, useRef, useState } from "react";
-import { flushSync } from "react-dom";
+import React, {useEffect, useRef, useState} from "react";
+import {flushSync} from "react-dom";
 import default_avatar from "../../../public/images/users/avatar-1.jpg";
 import styles from "./index.less";
 
-import { default as commonApi } from "@/services/api/common";
-import { default as login, default as loginApi } from "@/services/api/login";
+import {default as commonApi} from "@/services/api/common";
+import {default as login, default as loginApi} from "@/services/api/login";
 import userApi from "@/services/api/system/user";
 import tool from "@/services/tool";
 import dayjs from "dayjs";
@@ -50,7 +50,7 @@ export type GlobalHeaderRightProps = {
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
   const intl = useIntl();
-  const { message } = App.useApp();
+  const {message} = App.useApp();
 
   /**
    * 退出登录，并且将当前的 url 保存
@@ -81,20 +81,17 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
     const tokenTimer = window.setTimeout(() => {
       Modal.confirm({
         title: "Confirmation",
-        content: (
-          <div>
-            The session will expire after
-            <Statistic.Countdown
+        content: intl.formatMessage({id: 'component.refresh.token'}, {
+            time: <Statistic.Countdown
               value={dayjs(tool.getTokenExpiredAt()).valueOf()}
               onFinish={() => {
                 loginOut();
                 Modal.destroyAll();
               }}
-              style={{ display: "inline", marginInlineStart: 6 }}
-              valueStyle={{ display: "inline", fontSize: 16 }}
+              style={{display: "inline", marginInlineStart: 6}}
+              valueStyle={{display: "inline", fontSize: 16}}
             />
-            . Do you want to retrieve it again?
-          </div>
+          }
         ),
         onOk: async () => {
           await login.refresh().then((res) => {
@@ -108,17 +105,17 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
     };
   }, []);
 
-  const { initialState, setInitialState } = useModel("@@initialState");
+  const {initialState, setInitialState} = useModel("@@initialState");
 
   const formRef = useRef<ProFormInstance>();
   const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
   const [headImg, setHeadImg] = useState<string | React.ReactNode>();
   const [activeKey, setActiveKey] = useState<string>("1");
 
-  const onMenuClick: MenuProps["onClick"] = ({ key }) => {
+  const onMenuClick: MenuProps["onClick"] = ({key}) => {
     if (key === "logout") {
       flushSync(() => {
-        setInitialState((s) => ({ ...s, CurrentInfo: undefined }));
+        setInitialState((s) => ({...s, CurrentInfo: undefined}));
       });
       loginOut();
       return;
@@ -161,7 +158,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
     return loading;
   }
 
-  const { CurrentInfo } = initialState;
+  const {CurrentInfo} = initialState;
 
   if (!CurrentInfo || !CurrentInfo.user.username) {
     return loading;
@@ -170,41 +167,41 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
   const menuItems: MenuProps["items"] = [
     {
       key: "center",
-      icon: <UserOutlined />,
-      label: intl.formatMessage({ id: "pages.topmenu.usercenter" }),
+      icon: <UserOutlined/>,
+      label: intl.formatMessage({id: "pages.topmenu.usercenter"}),
     },
     {
       type: "divider" as const,
     },
     {
       key: "cleancache",
-      icon: <ClearOutlined />,
-      label: intl.formatMessage({ id: "pages.topmenu.clearcache" }),
+      icon: <ClearOutlined/>,
+      label: intl.formatMessage({id: "pages.topmenu.clearcache"}),
     },
     {
       key: "logout",
-      icon: <LogoutOutlined />,
-      label: intl.formatMessage({ id: "pages.topmenu.logout" }),
+      icon: <LogoutOutlined/>,
+      label: intl.formatMessage({id: "pages.topmenu.logout"}),
     },
   ];
 
   return (
     <div>
       <Dropdown
-        menu={{ items: menuItems, onClick: onMenuClick }}
+        menu={{items: menuItems, onClick: onMenuClick}}
         placement="bottomLeft"
       >
         <span className={`${styles.action} ${styles.account}`}>
           <Avatar
             size={30}
             className={styles.avatar}
-            src={CurrentInfo.user?.info?.avatar ?? default_avatar}
+            src={CurrentInfo.user?.avatar ?? default_avatar}
             alt="avatar"
           />
           <span className={`${styles.name} anticon`}>
             {CurrentInfo.user?.username}{" "}
             <DownOutlined
-              style={{ fontSize: 10, color: "#ccc", marginLeft: 5 }}
+              style={{fontSize: 10, color: "#ccc", marginLeft: 5}}
             />
           </span>
         </span>
@@ -213,7 +210,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
         formRef={formRef}
         width={400}
         onOpenChange={setDrawerVisible}
-        title={intl.formatMessage({ id: "pages.topmenu.usersetting" })}
+        title={intl.formatMessage({id: "pages.topmenu.usersetting"})}
         open={drawerVisible}
         drawerProps={{
           maskClosable: false,
@@ -243,10 +240,10 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
           if (msg.success) {
             if (activeKey === "2") {
               message.info(
-                intl.formatMessage({ id: "pages.topmenu.relogin" }),
+                intl.formatMessage({id: "pages.topmenu.relogin"}),
                 2,
                 () => {
-                  onMenuClick({ key: "logout" } as any);
+                  onMenuClick({key: "logout"} as any);
                 }
               );
             } else {
@@ -256,7 +253,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
               //即时更新用户资料
               const newInfo = await initialState.fetchUserInfo?.();
               flushSync(() =>
-                setInitialState((s) => ({ ...s, CurrentInfo: newInfo }))
+                setInitialState((s) => ({...s, CurrentInfo: newInfo}))
               );
             }
 
@@ -272,8 +269,8 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
             {
               label: (
                 <span>
-                  <UserOutlined />
-                  {intl.formatMessage({ id: "pages.topmenu.basicinfo" })}
+                  <UserOutlined/>
+                  {intl.formatMessage({id: "pages.topmenu.basicinfo"})}
                 </span>
               ),
               key: "1",
@@ -286,7 +283,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
                   >
                     <Upload
                       maxCount={1}
-                      customRequest={async ({ file, onSuccess, onError }) => {
+                      customRequest={async ({file, onSuccess, onError}) => {
                         const formData = new FormData();
                         formData.append("image", file);
                         const msg = await commonApi.uploadImage(formData);
@@ -298,7 +295,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
                           onSuccess?.(msg);
                         } else {
                           message.error(msg.message);
-                          onError?.({ method: "POST" } as any);
+                          onError?.({method: "POST"} as any);
                         }
                       }}
                       listType="picture-card"
@@ -318,22 +315,22 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
                       }}
                       onChange={async (info) => {
                         if (info.file.status === "uploading") {
-                          setHeadImg(<LoadingOutlined />);
+                          setHeadImg(<LoadingOutlined/>);
                           return;
                         }
                         if (info.file.status === "done") {
                           const src = info.file.response.data.url;
-                          formRef.current?.setFieldsValue({ avatar: src });
+                          formRef.current?.setFieldsValue({avatar: src});
                           setHeadImg(src);
                         }
                       }}
-                      style={{ border: 0 }}
+                      style={{border: 0}}
                     >
                       {headImg ? (
                         <Avatar
                           size={100}
                           src={headImg}
-                          style={{ color: "red" }}
+                          style={{color: "red"}}
                         />
                       ) : (
                         intl.formatMessage({
@@ -369,8 +366,8 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
             {
               label: (
                 <span>
-                  <SettingOutlined />
-                  {intl.formatMessage({ id: "pages.topmenu.secrity" })}
+                  <SettingOutlined/>
+                  {intl.formatMessage({id: "pages.topmenu.secrity"})}
                 </span>
               ),
               key: "2",
@@ -407,7 +404,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
                         {
                           required: activeKey === "2",
                         },
-                        ({ getFieldValue }) => ({
+                        ({getFieldValue}) => ({
                           validator(_, value) {
                             if (
                               !value ||
