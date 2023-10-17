@@ -1,13 +1,13 @@
-import { ModalForm } from '@ant-design/pro-form';
-import { Button, Form, message as Message, Modal, Popconfirm, Space, Switch } from 'antd';
-import React, { useRef, useState } from 'react';
-import { dict } from '@/services/api/system/dict';
-import type { RequestOptionsType } from '@ant-design/pro-utils';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { ProFormRadio, ProFormText, ProFormTextArea, ProTable } from '@ant-design/pro-components';
-import { PlusOutlined } from '@ant-design/icons';
-import type { ColumnItem as ColumnItem2 } from './index';
-import { Access, useAccess } from '@umijs/max';
+import {ModalForm} from '@ant-design/pro-form';
+import {Button, Form, message, Modal, Popconfirm, Space, Switch} from 'antd';
+import React, {useRef, useState} from 'react';
+import {dict} from '@/services/api/system/dict';
+import type {RequestOptionsType} from '@ant-design/pro-utils';
+import type {ActionType, ProColumns} from '@ant-design/pro-components';
+import {ProFormRadio, ProFormText, ProFormTextArea, ProTable} from '@ant-design/pro-components';
+import {PlusOutlined} from '@ant-design/icons';
+import type {ColumnItem as ColumnItem2} from './index';
+import {Access, useAccess} from '@umijs/max';
 
 type ColumnItem = {
   id: number; //主键
@@ -32,11 +32,11 @@ const crud = {
   showIndex: false,
   searchLabelWidth: '75px',
   pageLayout: 'fixed',
-  rowSelection: { showCheckedAll: true },
+  rowSelection: {showCheckedAll: true},
   operationColumn: true,
   operationWidth: 160,
-  add: { show: true, api: dict.saveDictData, auth: ['system:dict:save'] },
-  edit: { show: true, api: dict.updateDictData, auth: ['system:dict:update'] },
+  add: {show: true, api: dict.saveDictData, auth: ['system:dict:save']},
+  edit: {show: true, api: dict.updateDictData, auth: ['system:dict:update']},
   delete: {
     show: true,
     api: dict.deletesDictData,
@@ -44,7 +44,7 @@ const crud = {
     realApi: dict.realDeletesDictData,
     realAuth: ['system:dict:realDeletes'],
   },
-  recovery: { show: true, api: dict.recoverysDictData, auth: ['system:dict:recovery'] },
+  recovery: {show: true, api: dict.recoverysDictData, auth: ['system:dict:recovery']},
   dict: dict.getDict,
 };
 
@@ -62,7 +62,6 @@ export type FormProps = {
  * @constructor
  */
 const DataList: React.FC<FormProps> = (props) => {
-  const [message, contextHolder] = Message.useMessage();
   const actionRef = useRef<ActionType>();
   const [form] = Form.useForm();
   const [formVisible, setFormVisible] = useState(false);
@@ -71,7 +70,7 @@ const DataList: React.FC<FormProps> = (props) => {
   const access = useAccess();
 
   const changeStatus = async (status: number, id: number) => {
-    const response = await dict.changeStatus({ id, status });
+    const response = await dict.changeStatus({id, status});
     if (response.success) {
       message.success(response.message);
     }
@@ -162,7 +161,7 @@ const DataList: React.FC<FormProps> = (props) => {
             key="popconfirm"
             title="确定要删除吗？"
             onConfirm={async () => {
-              const result = await crud.delete.api({ ids: [record.id] });
+              const result = await crud.delete.api({ids: [record.id]});
               if (result.success) {
                 message.success(result.message);
                 actionRef?.current?.reload?.();
@@ -191,7 +190,6 @@ const DataList: React.FC<FormProps> = (props) => {
       width={'60%'}
       destroyOnClose={true}
     >
-      {contextHolder}
       <ProTable<ColumnItem>
         columns={columns}
         actionRef={actionRef}
@@ -202,21 +200,21 @@ const DataList: React.FC<FormProps> = (props) => {
           // selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
           defaultSelectedRowKeys: [],
         }}
-        tableAlertRender={({ selectedRowKeys, onCleanSelected }) => (
+        tableAlertRender={({selectedRowKeys, onCleanSelected}) => (
           <span>
             已选 {selectedRowKeys.length} 项
-            <Button type="link" style={{ marginInlineStart: 8 }} onClick={onCleanSelected}>
+            <Button type="link" style={{marginInlineStart: 8}} onClick={onCleanSelected}>
               取消选择
             </Button>
           </span>
         )}
-        tableAlertOptionRender={({ selectedRowKeys }) => {
+        tableAlertOptionRender={({selectedRowKeys}) => {
           return (
             <Space size={16}>
               <Popconfirm
                 title="确定要批量删除吗？"
                 onConfirm={async () => {
-                  const msg = await crud.delete.api({ ids: selectedRowKeys });
+                  const msg = await crud.delete.api({ids: selectedRowKeys});
                   if (msg.success) {
                     message.success(msg.message);
                     actionRef.current?.reload?.();
@@ -240,7 +238,7 @@ const DataList: React.FC<FormProps> = (props) => {
             };
           }
           // 页码
-          const _params = { type_id: props.typeId, page: params.current, ...params };
+          const _params = {type_id: props.typeId, page: params.current, ...params};
           delete _params.current;
 
           const result = await crud.api({
@@ -279,7 +277,7 @@ const DataList: React.FC<FormProps> = (props) => {
               key="button"
               type="primary"
               shape="round"
-              icon={<PlusOutlined />}
+              icon={<PlusOutlined/>}
               onClick={() => setFormVisible(true)}
             >
               新建
@@ -311,7 +309,7 @@ const DataList: React.FC<FormProps> = (props) => {
         onFinish={async (values) => {
           let result = null;
           if (row) {
-            result = await crud.edit.api(row.id, { ...row, ...values });
+            result = await crud.edit.api(row.id, {...row, ...values});
           } else {
             result = await crud.add.api({
               type_id: props.typeId,
@@ -332,11 +330,11 @@ const DataList: React.FC<FormProps> = (props) => {
           return true;
         }}
       >
-        <ProFormText name="label" label="字典标签" placeholder="请输入字典标签" />
-        <ProFormText name="value" label="字典值" placeholder="请输入字典值" />
-        <ProFormText name="sort" label="排序" placeholder="请输入排序" />
-        <ProFormRadio.Group name="status" label="状态" request={_getDataStatusEnum} />
-        <ProFormTextArea name="remark" label="备注" />
+        <ProFormText name="label" label="字典标签" placeholder="请输入字典标签"/>
+        <ProFormText name="value" label="字典值" placeholder="请输入字典值"/>
+        <ProFormText name="sort" label="排序" placeholder="请输入排序"/>
+        <ProFormRadio.Group name="status" label="状态" request={_getDataStatusEnum}/>
+        <ProFormTextArea name="remark" label="备注"/>
       </ModalForm>
     </Modal>
   );
