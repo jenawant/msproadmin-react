@@ -1,6 +1,7 @@
 import Skeleton from '@ant-design/pro-skeleton';
 import { useLocation } from '@umijs/max';
 import { Spin } from 'antd';
+import React from 'react';
 
 export default () => {
   const location = useLocation();

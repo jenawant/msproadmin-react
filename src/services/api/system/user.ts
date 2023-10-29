@@ -175,5 +175,28 @@ export default {
       data,
     });
   },
-
+  /**
+   * 用户异步导出
+   * @returns
+   */
+  asyncExportExcel (params = {}) {
+    return request({
+      url: 'system/user/asyncExport',
+      method: 'post',
+      params
+    })
+  },
+  /**
+   * 用户下载异步导出的文件
+   * @returns
+   */
+  asyncDownloadExcel (params = {}) {
+    return request({
+      url: 'system/user/asyncDownload',
+      method: 'get',
+      responseType: 'blob',
+      getResponse: true,
+      params
+    })
+  },
 };

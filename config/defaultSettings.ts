@@ -10,7 +10,7 @@ const Settings: LayoutSettings & {
 } = {
   navTheme: 'light',
   // 拂晓蓝
-  colorPrimary: '#FF2606',
+  colorPrimary: '#36cfc9',
   layout: 'top',
   contentWidth: 'Fluid',
   fixedHeader: true,
@@ -26,9 +26,9 @@ const Settings: LayoutSettings & {
     header: {
       colorBgHeader: '#2a3042',
       colorTextMenu: '#FFFFFF',
-      colorTextMenuActive: '#FF2606',
-      colorTextMenuSelected: '#FF2606',
-      colorTextMenuSecondary: '#FF2606',
+      colorTextMenuActive: '#36cfc9',
+      colorTextMenuSelected: '#36cfc9',
+      colorTextMenuSecondary: '#36cfc9',
       colorTextRightActionsItem: '#FFFFFF',
       heightLayoutHeader: 70,
     },

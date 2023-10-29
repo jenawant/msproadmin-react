@@ -1,5 +1,6 @@
 import { useIntl } from '@umijs/max';
 import { Button, message as Message, notification } from 'antd';
+import React from 'react';
 import defaultSettings from '../config/defaultSettings';
 
 const { pwa } = defaultSettings;

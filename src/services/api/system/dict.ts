@@ -5,9 +5,9 @@ export const dictType = {
    * 获取字典类型，无分页
    * @returns
    */
-  getList(params = {}) {
+  getOption(params = {}) {
     return request({
-      url: 'system/dictType/list',
+      url: 'system/dictType/option',
       method: 'get',
       params,
     });

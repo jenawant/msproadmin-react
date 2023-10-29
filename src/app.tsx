@@ -18,7 +18,7 @@ import login from './services/api/login';
 import tool from './services/tool';
 
 const loginPath = '/login';
-const allowWithoutLoginPath = [loginPath, '/corporate/verification/'];
+const allowWithoutLoginPath = [loginPath];
 
 interface IInitialState {
   settings?: Partial<LayoutSettings>;

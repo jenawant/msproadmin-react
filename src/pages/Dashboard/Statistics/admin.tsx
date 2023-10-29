@@ -4,11 +4,6 @@ import {Link} from '@umijs/max';
 
 import React, {useEffect, useState} from 'react';
 
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
-
-dayjs.extend(customParseFormat);
-
 import {EuroCircleFilled, PieChartFilled, ProfileFilled} from '@ant-design/icons';
 import {Alert, Space} from 'antd';
 

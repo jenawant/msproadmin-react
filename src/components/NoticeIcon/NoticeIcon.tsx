@@ -30,6 +30,12 @@ export type NoticeIconProps = {
 const NoticeIcon: React.FC<NoticeIconProps> & {
   Tab: typeof NoticeList;
 } = (props) => {
+  const { className, count, bell } = props;
+
+  const [visible, setVisible] = useMergedState<boolean>(false, {
+    value: props.popupVisible,
+    onChange: props.onPopupVisibleChange,
+  });
   const getNotificationBox = (): React.ReactNode => {
     const {
       children,
@@ -81,12 +87,6 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
     );
   };
 
-  const { className, count, bell } = props;
-
-  const [visible, setVisible] = useMergedState<boolean>(false, {
-    value: props.popupVisible,
-    onChange: props.onPopupVisibleChange,
-  });
   const noticeButtonClass = classNames(className, styles.noticeButton);
   const notificationBox = getNotificationBox();
   const NoticeBellIcon = bell || <BellOutlined className={styles.icon} />;

@@ -1,10 +1,9 @@
-import { PageContainer, ProCard, ProDescriptions } from '@ant-design/pro-components';
-import { Button, Divider, Space } from 'antd';
-import React, { useEffect, useState } from 'react';
+import {PageContainer, ProCard, ProDescriptions} from '@ant-design/pro-components';
+import {Button, Divider, Space, Progress} from 'antd';
+import React, {useEffect, useState} from 'react';
 
-import ApexRadial from '@/components/Charts/ApexRadial';
 import monitorApi from '@/services/api/system/monitor';
-import { ReloadOutlined } from '@ant-design/icons';
+import {ReloadOutlined} from '@ant-design/icons';
 
 type ServerItem = {
   cpu: {
@@ -28,7 +27,7 @@ type ServerItem = {
     project_path: string; //"/opt/www",
     start_time: string; //"2022-11-28 09:02:12",
     run_time: string; //"0年3天 4小时3分56秒",
-    mineadmin_version: string; //"1.0.0",
+    msproadmin_version: string; //"1.0.0",
     hyperf_version: string; //"2.2.33"
   };
   disk: {
@@ -55,6 +54,7 @@ export default () => {
     };
   }, [relaod]);
 
+  const colors = {'0%': '#87d068', '50%': '#ffe58f', '100%': '#fa541c'};
   return (
     <PageContainer
       header={{
@@ -80,7 +80,7 @@ export default () => {
           <Button
             type="primary"
             shape="round"
-            icon={<ReloadOutlined />}
+            icon={<ReloadOutlined/>}
             onClick={() => {
               setLoading(true);
               setReload(Math.random());
@@ -92,11 +92,11 @@ export default () => {
         }
       >
         <ProCard gutter={[16, 0]} loading={loading}>
-          <ProCard colSpan={18} bodyStyle={{ padding: 0 }}>
+          <ProCard colSpan={18} bodyStyle={{padding: 0}}>
             <ProDescriptions
               className="custom-description-label-width-fixed-300"
               size="small"
-              column={1}
+              column={2}
               title="CPU信息"
               tooltip="包含型号、使用率等信息"
               bordered
@@ -112,21 +112,16 @@ export default () => {
               </ProDescriptions.Item>
             </ProDescriptions>
           </ProCard>
-          <ProCard colSpan={6}>
-            <ApexRadial
-              dataColors={['#00b96b']}
-              label="CPU使用率"
-              percent={Number(data?.cpu.usage)}
-              height={300}
-            />
+          <ProCard colSpan={6} bodyStyle={{textAlign: 'center'}}>
+            <Progress type="dashboard" size={135} percent={parseFloat(data?.cpu.usage as string)} strokeColor={colors}/>
           </ProCard>
         </ProCard>
         <ProCard gutter={[16, 0]} loading={loading}>
-          <ProCard colSpan={18} bodyStyle={{ padding: 0 }}>
+          <ProCard colSpan={18} bodyStyle={{padding: 0}}>
             <ProDescriptions
               className="custom-description-label-width-fixed-300"
               size="small"
-              column={1}
+              column={2}
               title="内存信息"
               bordered
               params={data?.memory}
@@ -165,80 +160,78 @@ export default () => {
               ]}
             />
           </ProCard>
-          <ProCard colSpan={6}>
-            <ApexRadial
-              dataColors={['#00b96b']}
-              label="内存使用率"
-              percent={Number(data?.memory.rate)}
-              height={300}
-            />
+          <ProCard colSpan={6} bodyStyle={{textAlign: 'center'}}>
+            <Progress type="dashboard" size={135} percent={parseFloat(data?.memory.rate as string)}
+                      strokeColor={colors}/>
           </ProCard>
         </ProCard>
-        <ProCard loading={loading}>
-          <ProDescriptions
-            className="custom-description-label-width-fixed-300"
-            size="small"
-            column={2}
-            title="PHP及环境信息"
-            bordered
-            params={data?.phpenv}
-            request={async () => {
-              return Promise.resolve({
-                success: true,
-                data: { ...data?.phpenv, ...data?.disk },
-              });
-            }}
-            columns={[
-              {
-                title: '操作系统',
-                dataIndex: 'os',
-              },
-              {
-                title: 'PHP版本',
-                dataIndex: 'php_version',
-              },
-              {
-                title: 'Swoole版本',
-                dataIndex: 'swoole_version',
-              },
-              {
-                title: 'Hyperf版本',
-                dataIndex: 'hyperf_version',
-              },
-              {
-                title: 'Core版本',
-                dataIndex: 'mineadmin_version',
-              },
-              {
-                title: '系统物理路径',
-                dataIndex: 'project_path',
-              },
-              {
-                title: '系统启动时间',
-                dataIndex: 'start_time',
-              },
-              {
-                title: '系统运行时间',
-                dataIndex: 'run_time',
-              },
-              {
-                title: '磁盘信息',
-                dataIndex: 'rate',
-                span: 2,
-                render: (_, record) => (
-                  <Space>
-                    <span>总空间：{record.total}</span>
-                    <Divider type="vertical" />
-                    <span>已使用：{record.usage}</span>
-                    <Divider type="vertical" />
-                    <span>已剩余：{record.free}</span>
-                    <Divider type="vertical" />
-                    <span>使用率：{record.rate}</span>
-                  </Space>
-                ),
-              },
-            ]}
-          />
+        <ProCard gutter={[16, 0]} loading={loading}>
+          <ProCard colSpan={24} bodyStyle={{padding: 0}}>
+            <ProDescriptions
+              className="custom-description-label-width-fixed-300"
+              size="small"
+              column={2}
+              title="PHP及环境信息"
+              bordered
+              params={data?.phpenv}
+              request={async () => {
+                return Promise.resolve({
+                  success: true,
+                  data: {...data?.phpenv, ...data?.disk},
+                });
+              }}
+              columns={[
+                {
+                  title: '操作系统',
+                  dataIndex: 'os',
+                },
+                {
+                  title: 'PHP版本',
+                  dataIndex: 'php_version',
+                },
+                {
+                  title: 'Swoole版本',
+                  dataIndex: 'swoole_version',
+                },
+                {
+                  title: 'Hyperf版本',
+                  dataIndex: 'hyperf_version',
+                },
+                {
+                  title: 'Core版本',
+                  dataIndex: 'msproadmin_version',
+                },
+                {
+                  title: '系统物理路径',
+                  dataIndex: 'project_path',
+                },
+                {
+                  title: '系统启动时间',
+                  dataIndex: 'start_time',
+                },
+                {
+                  title: '系统运行时间',
+                  dataIndex: 'run_time',
+                },
+                {
+                  title: '磁盘信息',
+                  dataIndex: 'rate',
+                  span: 2,
+                  render: (_, record) => (
+                    <Space>
+                      <span>总空间：{record.total}</span>
+                      <Divider type="vertical"/>
+                      <span>已使用：{record.usage}</span>
+                      <Divider type="vertical"/>
+                      <span>已剩余：{record.free}</span>
+                      <Divider type="vertical"/>
+                      <span>使用率：{record.rate}</span>
+                    </Space>
+                  ),
+                },
+              ]}
+            />
+          </ProCard>
         </ProCard>
       </ProCard>
     </PageContainer>

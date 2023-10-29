@@ -13,6 +13,14 @@ export default {
     })
   },
 
+  getDataSourceList (params = {}) {
+    return request({
+      url: 'setting/code/getDataSourceList',
+      method: 'get',
+      params
+    })
+  },
+
   /**
    * 删除
    * @returns
