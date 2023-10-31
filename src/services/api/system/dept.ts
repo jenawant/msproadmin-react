@@ -1,4 +1,4 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 export default {
   /**
@@ -7,10 +7,10 @@ export default {
    */
   getList(params = {}) {
     return request({
-      url: 'system/dept/index',
-      method: 'get',
-      params
-    })
+      url: "system/dept/index",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -19,10 +19,10 @@ export default {
    */
   getRecycleList(params = {}) {
     return request({
-      url: 'system/dept/recycle',
-      method: 'get',
-      params
-    })
+      url: "system/dept/recycle",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -31,9 +31,9 @@ export default {
    */
   tree() {
     return request({
-      url: 'system/dept/tree',
-      method: 'get'
-    })
+      url: "system/dept/tree",
+      method: "get",
+    });
   },
 
   /**
@@ -42,10 +42,10 @@ export default {
    */
   save(params = {}) {
     return request({
-      url: 'system/dept/save',
-      method: 'post',
-      data: params
-    })
+      url: "system/dept/save",
+      method: "post",
+      data: params,
+    });
   },
 
   /**
@@ -54,10 +54,10 @@ export default {
    */
   deletes(data: any) {
     return request({
-      url: 'system/dept/delete',
-      method: 'delete',
-      data
-    })
+      url: "system/dept/delete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -66,10 +66,10 @@ export default {
    */
   recoverys(data: any) {
     return request({
-      url: 'system/dept/recovery',
-      method: 'put',
-      data
-    })
+      url: "system/dept/recovery",
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -78,10 +78,10 @@ export default {
    */
   realDeletes(data: any) {
     return request({
-      url: 'system/dept/realDelete',
-      method: 'delete',
-      data
-    })
+      url: "system/dept/realDelete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -90,22 +90,22 @@ export default {
    */
   update(id: number, params = {}) {
     return request({
-      url: 'system/dept/update/' + id,
-      method: 'put',
-      data: params
-    })
+      url: "system/dept/update/" + id,
+      method: "put",
+      data: params,
+    });
   },
-  
+
   /**
    * 数字运算操作
    * @returns
    */
-   numberOperation(data = {}) {
+  numberOperation(data = {}) {
     return request({
-      url: 'system/dept/numberOperation',
-      method: 'put',
-      data
-    })
+      url: "system/dept/numberOperation",
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -114,9 +114,9 @@ export default {
    */
   changeStatus(data = {}) {
     return request({
-      url: 'system/dept/changeStatus',
-      method: 'put',
-      data
-    })
+      url: "system/dept/changeStatus",
+      method: "put",
+      data,
+    });
   },
-}
+};

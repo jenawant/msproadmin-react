@@ -1,4 +1,4 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 export default {
   /**
@@ -7,16 +7,16 @@ export default {
    */
   getPageList(params = {}) {
     return request({
-      url: 'system/user/index',
-      method: 'get',
+      url: "system/user/index",
+      method: "get",
       params,
     });
   },
 
   getOption(params = {}) {
     return request({
-      url: 'system/user/option',
-      method: 'get',
+      url: "system/user/option",
+      method: "get",
       params,
     });
   },
@@ -27,8 +27,8 @@ export default {
    */
   getRecyclePageList(params = {}) {
     return request({
-      url: 'system/user/recycle',
-      method: 'get',
+      url: "system/user/recycle",
+      method: "get",
       params,
     });
   },
@@ -39,8 +39,8 @@ export default {
    */
   read(id: string) {
     return request({
-      url: 'system/user/read/' + id,
-      method: 'get',
+      url: "system/user/read/" + id,
+      method: "get",
     });
   },
 
@@ -50,8 +50,8 @@ export default {
    */
   save(params = {}) {
     return request({
-      url: 'system/user/save',
-      method: 'post',
+      url: "system/user/save",
+      method: "post",
       data: params,
     });
   },
@@ -62,8 +62,8 @@ export default {
    */
   deletes(data: any) {
     return request({
-      url: 'system/user/delete',
-      method: 'delete',
+      url: "system/user/delete",
+      method: "delete",
       data,
     });
   },
@@ -74,8 +74,8 @@ export default {
    */
   recoverys(data: any) {
     return request({
-      url: 'system/user/recovery',
-      method: 'put',
+      url: "system/user/recovery",
+      method: "put",
       data,
     });
   },
@@ -86,8 +86,8 @@ export default {
    */
   realDeletes(data: any) {
     return request({
-      url: 'system/user/realDelete',
-      method: 'delete',
+      url: "system/user/realDelete",
+      method: "delete",
       data,
     });
   },
@@ -98,8 +98,8 @@ export default {
    */
   update(id: number, data = {}) {
     return request({
-      url: 'system/user/update/' + id,
-      method: 'put',
+      url: "system/user/update/" + id,
+      method: "put",
       data,
     });
   },
@@ -110,8 +110,8 @@ export default {
    */
   changeStatus(data = {}) {
     return request({
-      url: 'system/user/changeStatus',
-      method: 'put',
+      url: "system/user/changeStatus",
+      method: "put",
       data,
     });
   },
@@ -122,8 +122,8 @@ export default {
    */
   clearCache(params = {}) {
     return request({
-      url: 'system/user/clearCache',
-      method: 'post',
+      url: "system/user/clearCache",
+      method: "post",
       data: params,
     });
   },
@@ -134,8 +134,8 @@ export default {
    */
   setHomePage(data = {}) {
     return request({
-      url: 'system/user/setHomePage',
-      method: 'post',
+      url: "system/user/setHomePage",
+      method: "post",
       data,
     });
   },
@@ -146,8 +146,8 @@ export default {
    */
   initUserPassword(data: any) {
     return request({
-      url: 'system/user/initUserPassword',
-      method: 'put',
+      url: "system/user/initUserPassword",
+      method: "put",
       data,
     });
   },
@@ -158,8 +158,8 @@ export default {
    */
   updateInfo(data = {}) {
     return request({
-      url: 'system/user/updateInfo',
-      method: 'post',
+      url: "system/user/updateInfo",
+      method: "post",
       data,
     });
   },
@@ -170,8 +170,8 @@ export default {
    */
   modifyPassword(data = {}) {
     return request({
-      url: 'system/user/modifyPassword',
-      method: 'post',
+      url: "system/user/modifyPassword",
+      method: "post",
       data,
     });
   },
@@ -179,24 +179,24 @@ export default {
    * 用户异步导出
    * @returns
    */
-  asyncExportExcel (params = {}) {
+  asyncExportExcel(params = {}) {
     return request({
-      url: 'system/user/asyncExport',
-      method: 'post',
-      params
-    })
+      url: "system/user/asyncExport",
+      method: "post",
+      params,
+    });
   },
   /**
    * 用户下载异步导出的文件
    * @returns
    */
-  asyncDownloadExcel (params = {}) {
+  asyncDownloadExcel(params = {}) {
     return request({
-      url: 'system/user/asyncDownload',
-      method: 'get',
-      responseType: 'blob',
+      url: "system/user/asyncDownload",
+      method: "get",
+      responseType: "blob",
       getResponse: true,
-      params
-    })
+      params,
+    });
   },
 };

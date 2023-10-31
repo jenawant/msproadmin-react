@@ -1,121 +1,121 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 export default {
   /**
    * 获取代码生成列表
    * @returns
    */
-  getPageList (params = {}) {
+  getPageList(params = {}) {
     return request({
-      url: 'setting/code/index',
-      method: 'get',
-      params
-    })
+      url: "setting/code/index",
+      method: "get",
+      params,
+    });
   },
 
-  getDataSourceList (params = {}) {
+  getDataSourceList(params = {}) {
     return request({
-      url: 'setting/code/getDataSourceList',
-      method: 'get',
-      params
-    })
+      url: "setting/code/getDataSourceList",
+      method: "get",
+      params,
+    });
   },
 
   /**
    * 删除
    * @returns
    */
-  deletes (data: any) {
+  deletes(data: any) {
     return request({
-      url: 'setting/code/delete',
-      method: 'delete',
-      data
-    })
+      url: "setting/code/delete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
    * 编辑生成信息
    * @returns
    */
-  update (data = {}) {
+  update(data = {}) {
     return request({
-      url: 'setting/code/update',
-      method: 'post',
-      data
-    })
+      url: "setting/code/update",
+      method: "post",
+      data,
+    });
   },
 
-  readTable (params = {}) {
+  readTable(params = {}) {
     return request({
-      url: 'setting/code/readTable',
-      method: 'get',
-      params
-    })
+      url: "setting/code/readTable",
+      method: "get",
+      params,
+    });
   },
 
   /**
    * 生成代码
    * @returns
    */
-  generateCode (data = {}) {
+  generateCode(data = {}) {
     return request({
-      url: 'setting/code/generate',
-      method: 'post',
-      responseType: 'blob',
+      url: "setting/code/generate",
+      method: "post",
+      responseType: "blob",
       getResponse: true,
       data,
-    })
+    });
   },
 
   /**
    * 装载数据表
    * @returns
    */
-  loadTable (data = {}) {
+  loadTable(data = {}) {
     return request({
-      url: 'setting/code/loadTable',
-      method: 'post',
-      data
-    })
+      url: "setting/code/loadTable",
+      method: "post",
+      data,
+    });
   },
 
   /**
    * 同步数据表
    * @returns
    */
-  sync (data: string) {
+  sync(data: string) {
     return request({
-      url: 'setting/code/sync/' + data,
-      method: 'put'
-    })
+      url: "setting/code/sync/" + data,
+      method: "put",
+    });
   },
 
   /**
    * 预览代码
    * @returns
    */
-  preview (params = {}) {
+  preview(params = {}) {
     return request({
-      url: 'setting/code/preview',
-      method: 'get',
-      params
-    })
+      url: "setting/code/preview",
+      method: "get",
+      params,
+    });
   },
 
   // 获取表中字段信息
   getTableColumns(params = {}) {
     return request({
-      url: 'setting/code/getTableColumns',
-      method: 'get',
-      params
-    })
+      url: "setting/code/getTableColumns",
+      method: "get",
+      params,
+    });
   },
 
   // 获取所有模型
   getModels() {
     return request({
-      url: 'setting/code/getModels',
-      method: 'get',
-    })
-  }
-}
+      url: "setting/code/getModels",
+      method: "get",
+    });
+  },
+};

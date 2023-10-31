@@ -1,17 +1,16 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 export default {
-
   /**
    * 获取配置列表
    * @returns
    */
   getConfigList(params: any) {
     return request({
-      url: 'setting/config/index',
-      method: 'get',
-      params
-    })
+      url: "setting/config/index",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -20,10 +19,10 @@ export default {
    */
   clearCache(data = {}) {
     return request({
-      url: 'setting/config/clearCache',
-      method: 'post',
-      data
-    })
+      url: "setting/config/clearCache",
+      method: "post",
+      data,
+    });
   },
 
   /**
@@ -32,10 +31,10 @@ export default {
    */
   delete(data: any) {
     return request({
-      url: 'setting/config/delete',
-      method: 'delete',
-      data
-    })
+      url: "setting/config/delete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -44,10 +43,10 @@ export default {
    */
   save(data = {}) {
     return request({
-      url: 'setting/config/save',
-      method: 'post',
-      data
-    })
+      url: "setting/config/save",
+      method: "post",
+      data,
+    });
   },
 
   /**
@@ -56,22 +55,22 @@ export default {
    */
   update(data = {}) {
     return request({
-      url: 'setting/config/update',
-      method: 'post',
-      data
-    })
+      url: "setting/config/update",
+      method: "post",
+      data,
+    });
   },
 
   /**
    * 按 keys 更新配置
-   * @returns 
+   * @returns
    */
   updateByKeys(data: any) {
     return request({
-      url: 'setting/config/updateByKeys',
-      method: 'post',
-      data
-    })
+      url: "setting/config/updateByKeys",
+      method: "post",
+      data,
+    });
   },
 
   /**
@@ -80,10 +79,10 @@ export default {
    */
   getConfigGroupList(params = {}) {
     return request({
-      url: 'setting/configGroup/index',
-      method: 'get',
-      params
-    })
+      url: "setting/configGroup/index",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -92,10 +91,10 @@ export default {
    */
   saveConfigGroup(data = {}) {
     return request({
-      url: 'setting/configGroup/save',
-      method: 'post',
-      data
-    })
+      url: "setting/configGroup/save",
+      method: "post",
+      data,
+    });
   },
 
   /**
@@ -104,21 +103,21 @@ export default {
    */
   updateConfigGroup(data = {}) {
     return request({
-      url: 'setting/configGroup/update',
-      method: 'post',
-      data
-    })
+      url: "setting/configGroup/update",
+      method: "post",
+      data,
+    });
   },
 
   /**
    * 删除配置组
    * @returns
    */
-   deleteConfigGroup(data = {}) {
+  deleteConfigGroup(data = {}) {
     return request({
-      url: 'setting/configGroup/delete',
-      method: 'delete',
-      data
-    })
+      url: "setting/configGroup/delete",
+      method: "delete",
+      data,
+    });
   },
-}
+};

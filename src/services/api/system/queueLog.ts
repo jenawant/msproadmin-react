@@ -1,17 +1,16 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 export default {
-
   /**
    * 获取队列日志分页列表
    * @returns
    */
   getPageList(params = {}) {
     return request({
-      url: 'system/logs/getQueueLogPageList',
-      method: 'get',
-      params
-    })
+      url: "system/logs/getQueueLogPageList",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -20,9 +19,9 @@ export default {
    */
   deletes(data: any) {
     return request({
-      url: 'system/logs/deleteQueueLog',
-      method: 'delete',
-      data
-    })
-  }
-}
+      url: "system/logs/deleteQueueLog",
+      method: "delete",
+      data,
+    });
+  },
+};

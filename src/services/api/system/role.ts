@@ -1,4 +1,4 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 export default {
   /**
@@ -7,10 +7,10 @@ export default {
    */
   getPageList(params = {}) {
     return request({
-      url: 'system/role/index',
-      method: 'get',
-      params
-    })
+      url: "system/role/index",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -19,10 +19,10 @@ export default {
    */
   getList(params = {}) {
     return request({
-      url: 'system/role/list',
-      method: 'get',
-      params
-    })
+      url: "system/role/list",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -31,9 +31,9 @@ export default {
    */
   getMenuByRole(id: string) {
     return request({
-      url: 'system/role/getMenuByRole/' + id,
-      method: 'get'
-    })
+      url: "system/role/getMenuByRole/" + id,
+      method: "get",
+    });
   },
 
   /**
@@ -42,9 +42,9 @@ export default {
    */
   getDeptByRole(id: string) {
     return request({
-      url: 'system/role/getDeptByRole/' + id,
-      method: 'get'
-    })
+      url: "system/role/getDeptByRole/" + id,
+      method: "get",
+    });
   },
 
   /**
@@ -53,10 +53,10 @@ export default {
    */
   getRecyclePageList(params = {}) {
     return request({
-      url: 'system/role/recycle',
-      method: 'get',
-      params
-    })
+      url: "system/role/recycle",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -65,10 +65,10 @@ export default {
    */
   save(data = {}) {
     return request({
-      url: 'system/role/save',
-      method: 'post',
-      data
-    })
+      url: "system/role/save",
+      method: "post",
+      data,
+    });
   },
 
   /**
@@ -77,10 +77,10 @@ export default {
    */
   deletes(data: any) {
     return request({
-      url: 'system/role/delete',
-      method: 'delete',
-      data
-    })
+      url: "system/role/delete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -89,10 +89,10 @@ export default {
    */
   recoverys(data: any) {
     return request({
-      url: 'system/role/recovery',
-      method: 'put',
-      data
-    })
+      url: "system/role/recovery",
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -101,10 +101,10 @@ export default {
    */
   realDeletes(data: any) {
     return request({
-      url: 'system/role/realDelete',
-      method: 'delete',
-      data
-    })
+      url: "system/role/realDelete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -113,18 +113,18 @@ export default {
    */
   update(id: number, data = {}) {
     return request({
-      url: 'system/role/update/' + id,
-      method: 'put',
-      data
-    })
+      url: "system/role/update/" + id,
+      method: "put",
+      data,
+    });
   },
 
   updateMenuPermission(id: number, data: any) {
     return request({
-      url: 'system/role/menuPermission/' + id,
-      method: 'put',
-      data
-    })
+      url: "system/role/menuPermission/" + id,
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -133,18 +133,18 @@ export default {
    */
   numberOperation(data = {}) {
     return request({
-      url: 'system/role/numberOperation',
-      method: 'put',
-      data
-    })
+      url: "system/role/numberOperation",
+      method: "put",
+      data,
+    });
   },
 
   updateDataPermission(id: number, data: any) {
     return request({
-      url: 'system/role/dataPermission/' + id,
-      method: 'put',
-      data
-    })
+      url: "system/role/dataPermission/" + id,
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -153,10 +153,9 @@ export default {
    */
   changeStatus(params = {}) {
     return request({
-      url: 'system/role/changeStatus',
-      method: 'put',
-      data: params
-    })
-  }
-
-}
+      url: "system/role/changeStatus",
+      method: "put",
+      data: params,
+    });
+  },
+};

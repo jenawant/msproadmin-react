@@ -1,4 +1,4 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 export const dictType = {
   /**
@@ -7,8 +7,8 @@ export const dictType = {
    */
   getOption(params = {}) {
     return request({
-      url: 'system/dictType/option',
-      method: 'get',
+      url: "system/dictType/option",
+      method: "get",
       params,
     });
   },
@@ -18,8 +18,8 @@ export const dictType = {
    */
   getTypeList(params = {}) {
     return request({
-      url: 'system/dictType/index',
-      method: 'get',
+      url: "system/dictType/index",
+      method: "get",
       params,
     });
   },
@@ -29,8 +29,8 @@ export const dictType = {
    */
   getRecycleTypeList(params = {}) {
     return request({
-      url: 'system/dictType/recycle',
-      method: 'get',
+      url: "system/dictType/recycle",
+      method: "get",
       params,
     });
   },
@@ -41,8 +41,8 @@ export const dictType = {
    */
   save(params = {}) {
     return request({
-      url: 'system/dictType/save',
-      method: 'post',
+      url: "system/dictType/save",
+      method: "post",
       data: params,
     });
   },
@@ -53,8 +53,8 @@ export const dictType = {
    */
   deletes(data: any) {
     return request({
-      url: 'system/dictType/delete',
-      method: 'delete',
+      url: "system/dictType/delete",
+      method: "delete",
       data,
     });
   },
@@ -65,8 +65,8 @@ export const dictType = {
    */
   recoverys(data: any) {
     return request({
-      url: 'system/dictType/recovery',
-      method: 'put',
+      url: "system/dictType/recovery",
+      method: "put",
       data,
     });
   },
@@ -77,8 +77,8 @@ export const dictType = {
    */
   realDelete(data: any) {
     return request({
-      url: 'system/dictType/realDelete',
-      method: 'delete',
+      url: "system/dictType/realDelete",
+      method: "delete",
       data,
     });
   },
@@ -89,8 +89,8 @@ export const dictType = {
    */
   update(id: string, params = {}) {
     return request({
-      url: 'system/dictType/update/' + id,
-      method: 'put',
+      url: "system/dictType/update/" + id,
+      method: "put",
       data: params,
     });
   },
@@ -101,8 +101,8 @@ export const dictType = {
    */
   changeStatus(data = {}) {
     return request({
-      url: 'system/dictType/changeStatus',
-      method: 'put',
+      url: "system/dictType/changeStatus",
+      method: "put",
       data,
     });
   },
@@ -116,8 +116,8 @@ export const dict = {
    */
   getDict(code: string) {
     return request({
-      url: 'system/dataDict/list?code=' + code,
-      method: 'get',
+      url: "system/dataDict/list?code=" + code,
+      method: "get",
     });
   },
 
@@ -128,8 +128,8 @@ export const dict = {
    */
   getDicts(codes: any[]) {
     return request({
-      url: 'system/dataDict/lists?codes=' + codes.join(','),
-      method: 'get',
+      url: "system/dataDict/lists?codes=" + codes.join(","),
+      method: "get",
     });
   },
 
@@ -139,8 +139,8 @@ export const dict = {
    */
   getPageList(params = {}) {
     return request({
-      url: 'system/dataDict/index',
-      method: 'get',
+      url: "system/dataDict/index",
+      method: "get",
       params,
     });
   },
@@ -151,8 +151,8 @@ export const dict = {
    */
   getRecyclePageList(params = {}) {
     return request({
-      url: 'system/dataDict/recycle',
-      method: 'get',
+      url: "system/dataDict/recycle",
+      method: "get",
       params,
     });
   },
@@ -163,8 +163,8 @@ export const dict = {
    */
   saveDictData(data = {}) {
     return request({
-      url: 'system/dataDict/save',
-      method: 'post',
+      url: "system/dataDict/save",
+      method: "post",
       data,
     });
   },
@@ -175,8 +175,8 @@ export const dict = {
    */
   deletesDictData(data: any) {
     return request({
-      url: 'system/dataDict/delete',
-      method: 'delete',
+      url: "system/dataDict/delete",
+      method: "delete",
       data,
     });
   },
@@ -187,8 +187,8 @@ export const dict = {
    */
   recoverysDictData(data: any) {
     return request({
-      url: 'system/dataDict/recovery',
-      method: 'put',
+      url: "system/dataDict/recovery",
+      method: "put",
       data,
     });
   },
@@ -199,8 +199,8 @@ export const dict = {
    */
   realDeletesDictData(data: any) {
     return request({
-      url: 'system/dataDict/realDelete',
-      method: 'delete',
+      url: "system/dataDict/realDelete",
+      method: "delete",
       data,
     });
   },
@@ -211,8 +211,8 @@ export const dict = {
    */
   updateDictData(id: number, data = {}) {
     return request({
-      url: 'system/dataDict/update/' + id,
-      method: 'put',
+      url: "system/dataDict/update/" + id,
+      method: "put",
       data,
     });
   },
@@ -223,8 +223,8 @@ export const dict = {
    */
   clearCache() {
     return request({
-      url: 'system/dataDict/clearCache',
-      method: 'post',
+      url: "system/dataDict/clearCache",
+      method: "post",
     });
   },
 
@@ -234,8 +234,8 @@ export const dict = {
    */
   numberOperation(data = {}) {
     return request({
-      url: 'system/dataDict/numberOperation',
-      method: 'put',
+      url: "system/dataDict/numberOperation",
+      method: "put",
       data,
     });
   },
@@ -246,8 +246,8 @@ export const dict = {
    */
   changeStatus(data = {}) {
     return request({
-      url: 'system/dataDict/changeStatus',
-      method: 'put',
+      url: "system/dataDict/changeStatus",
+      method: "put",
       data,
     });
   },

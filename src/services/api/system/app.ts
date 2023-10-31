@@ -1,21 +1,20 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 /**
  * 应用管理 API JS
  */
 
 export default {
-
   /**
    * 获取应用管理分页列表
    * @returns
    */
   getList(params = {}) {
     return request({
-      url: 'system/app/index',
-      method: 'get',
-      params
-    })
+      url: "system/app/index",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -24,10 +23,10 @@ export default {
    */
   getRecycleList(params = {}) {
     return request({
-      url: 'system/app/recycle',
-      method: 'get',
-      params
-    })
+      url: "system/app/recycle",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -36,10 +35,10 @@ export default {
    */
   save(data = {}) {
     return request({
-      url: 'system/app/save',
-      method: 'post',
-      data
-    })
+      url: "system/app/save",
+      method: "post",
+      data,
+    });
   },
 
   /**
@@ -48,10 +47,10 @@ export default {
    */
   read(params = {}) {
     return request({
-      url: 'system/app/read',
-      method: 'post',
-      data: params
-    })
+      url: "system/app/read",
+      method: "post",
+      data: params,
+    });
   },
 
   /**
@@ -60,10 +59,10 @@ export default {
    */
   deletes(data: any) {
     return request({
-      url: 'system/app/delete',
-      method: 'delete',
-      data
-    })
+      url: "system/app/delete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -72,10 +71,10 @@ export default {
    */
   recoverys(data: any) {
     return request({
-      url: 'system/app/recovery',
-      method: 'put',
-      data
-    })
+      url: "system/app/recovery",
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -84,10 +83,10 @@ export default {
    */
   realDeletes(data: any) {
     return request({
-      url: 'system/app/realDelete',
-      method: 'delete',
-      data
-    })
+      url: "system/app/realDelete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -96,10 +95,10 @@ export default {
    */
   update(id: number, data = {}) {
     return request({
-      url: 'system/app/update/' + id,
-      method: 'put',
-      data
-    })
+      url: "system/app/update/" + id,
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -108,9 +107,9 @@ export default {
    */
   getAppId() {
     return request({
-      url: 'system/app/getAppId',
-      method: 'get'
-    })
+      url: "system/app/getAppId",
+      method: "get",
+    });
   },
 
   /**
@@ -119,9 +118,9 @@ export default {
    */
   getAppSecret() {
     return request({
-      url: 'system/app/getAppSecret',
-      method: 'get'
-    })
+      url: "system/app/getAppSecret",
+      method: "get",
+    });
   },
 
   /**
@@ -130,10 +129,10 @@ export default {
    */
   bind(id: number, data = {}) {
     return request({
-      url: 'system/app/bind/' + id,
-      method: 'put',
-      data
-    })
+      url: "system/app/bind/" + id,
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -142,10 +141,10 @@ export default {
    */
   getBindApiList(params = {}) {
     return request({
-      url: 'system/app/getApiList',
-      method: 'get',
-      params
-    })
+      url: "system/app/getApiList",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -154,9 +153,9 @@ export default {
    */
   changeStatus(data = {}) {
     return request({
-      url: 'system/app/changeStatus',
-      method: 'put',
-      data
-    })
+      url: "system/app/changeStatus",
+      method: "put",
+      data,
+    });
   },
-}
+};

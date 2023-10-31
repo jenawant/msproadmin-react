@@ -1,4 +1,4 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 export default {
   /**
@@ -7,10 +7,10 @@ export default {
    */
   getList(params = {}) {
     return request({
-      url: 'system/menu/index',
-      method: 'get',
-      params
-    })
+      url: "system/menu/index",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -19,10 +19,10 @@ export default {
    */
   getRecycleList(params = {}) {
     return request({
-      url: 'system/menu/recycle',
-      method: 'get',
-      params
-    })
+      url: "system/menu/recycle",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -31,10 +31,10 @@ export default {
    */
   tree(params = {}) {
     return request({
-      url: 'system/menu/tree',
-      method: 'get',
-      params
-    })
+      url: "system/menu/tree",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -43,10 +43,10 @@ export default {
    */
   save(params = {}) {
     return request({
-      url: 'system/menu/save',
-      method: 'post',
-      data: params
-    })
+      url: "system/menu/save",
+      method: "post",
+      data: params,
+    });
   },
 
   /**
@@ -55,10 +55,10 @@ export default {
    */
   deletes(data: any) {
     return request({
-      url: 'system/menu/delete',
-      method: 'delete',
-      data
-    })
+      url: "system/menu/delete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -67,10 +67,10 @@ export default {
    */
   recoverys(data: any) {
     return request({
-      url: 'system/menu/recovery',
-      method: 'put',
-      data
-    })
+      url: "system/menu/recovery",
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -79,10 +79,10 @@ export default {
    */
   realDeletes(data: any) {
     return request({
-      url: 'system/menu/realDelete',
-      method: 'delete',
-      data
-    })
+      url: "system/menu/realDelete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -91,10 +91,10 @@ export default {
    */
   update(id: any, data = {}) {
     return request({
-      url: 'system/menu/update/' + id,
-      method: 'put',
-      data
-    })
+      url: "system/menu/update/" + id,
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -103,10 +103,10 @@ export default {
    */
   numberOperation(data = {}) {
     return request({
-      url: 'system/menu/numberOperation',
-      method: 'put',
-      data
-    })
+      url: "system/menu/numberOperation",
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -115,9 +115,9 @@ export default {
    */
   changeStatus(data = {}) {
     return request({
-      url: 'system/menu/changeStatus',
-      method: 'put',
-      data
-    })
+      url: "system/menu/changeStatus",
+      method: "put",
+      data,
+    });
   },
-}
+};

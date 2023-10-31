@@ -1,21 +1,20 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 /**
  * 接口管理 API JS
  */
 
 export default {
-
   /**
    * 获取接口管理分页列表
    * @returns
    */
   getList(params = {}) {
     return request({
-      url: 'system/api/index',
-      method: 'get',
-      params
-    })
+      url: "system/api/index",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -24,9 +23,9 @@ export default {
    */
   getModuleList() {
     return request({
-      url: 'system/api/getModuleList',
-      method: 'get'
-    })
+      url: "system/api/getModuleList",
+      method: "get",
+    });
   },
 
   /**
@@ -35,10 +34,10 @@ export default {
    */
   getRecycleList(params = {}) {
     return request({
-      url: 'system/api/recycle',
-      method: 'get',
-      params
-    })
+      url: "system/api/recycle",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -47,10 +46,10 @@ export default {
    */
   save(data = {}) {
     return request({
-      url: 'system/api/save',
-      method: 'post',
-      data
-    })
+      url: "system/api/save",
+      method: "post",
+      data,
+    });
   },
 
   /**
@@ -59,10 +58,10 @@ export default {
    */
   read(data = {}) {
     return request({
-      url: 'system/api/read',
-      method: 'post',
-      data
-    })
+      url: "system/api/read",
+      method: "post",
+      data,
+    });
   },
 
   /**
@@ -71,10 +70,10 @@ export default {
    */
   deletes(data: any) {
     return request({
-      url: 'system/api/delete',
-      method: 'delete',
-      data
-    })
+      url: "system/api/delete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -83,10 +82,10 @@ export default {
    */
   recoverys(data: any) {
     return request({
-      url: 'system/api/recovery',
-      method: 'put',
-      data
-    })
+      url: "system/api/recovery",
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -95,10 +94,10 @@ export default {
    */
   realDeletes(data: any) {
     return request({
-      url: 'system/api/realDelete',
-      method: 'delete',
-      data
-    })
+      url: "system/api/realDelete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -107,10 +106,10 @@ export default {
    */
   update(id: number, data = {}) {
     return request({
-      url: 'system/api/update/' + id,
-      method: 'put',
-      data
-    })
+      url: "system/api/update/" + id,
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -119,10 +118,9 @@ export default {
    */
   changeStatus(data = {}) {
     return request({
-      url: 'system/api/changeStatus',
-      method: 'put',
-      data
-    })
+      url: "system/api/changeStatus",
+      method: "put",
+      data,
+    });
   },
-
-}
+};

@@ -1,9 +1,14 @@
-import {PageContainer, ProCard, ProDescriptions} from '@ant-design/pro-components';
-import {Button, Divider, Space, Progress} from 'antd';
-import React, {useEffect, useState} from 'react';
+import {
+  PageContainer,
+  ProCard,
+  ProDescriptions,
+} from "@ant-design/pro-components";
+import { Button, Divider, Space } from "antd";
+import React, { useEffect, useState } from "react";
 
-import monitorApi from '@/services/api/system/monitor';
-import {ReloadOutlined} from '@ant-design/icons';
+import ApexRadial from "@/components/Charts/ApexRadial";
+import monitorApi from "@/services/api/system/monitor";
+import { ReloadOutlined } from "@ant-design/icons";
 
 type ServerItem = {
   cpu: {
@@ -54,19 +59,18 @@ export default () => {
     };
   }, [relaod]);
 
-  const colors = {'0%': '#87d068', '50%': '#ffe58f', '100%': '#fa541c'};
   return (
     <PageContainer
       header={{
         breadcrumb: {
           items: [
             {
-              path: '',
-              title: '监控',
+              path: "",
+              title: "监控",
             },
             {
-              path: '',
-              title: '服务监控',
+              path: "",
+              title: "服务监控",
             },
           ],
         },
@@ -80,7 +84,7 @@ export default () => {
           <Button
             type="primary"
             shape="round"
-            icon={<ReloadOutlined/>}
+            icon={<ReloadOutlined />}
             onClick={() => {
               setLoading(true);
               setReload(Math.random());
@@ -92,18 +96,24 @@ export default () => {
         }
       >
         <ProCard gutter={[16, 0]} loading={loading}>
-          <ProCard colSpan={18} bodyStyle={{padding: 0}}>
+          <ProCard colSpan={18} bodyStyle={{ padding: 0 }}>
             <ProDescriptions
               className="custom-description-label-width-fixed-300"
               size="small"
-              column={2}
+              column={1}
               title="CPU信息"
               tooltip="包含型号、使用率等信息"
               bordered
             >
-              <ProDescriptions.Item label="型号">{data?.cpu.name}</ProDescriptions.Item>
-              <ProDescriptions.Item label="核心数">{data?.cpu.cores}</ProDescriptions.Item>
-              <ProDescriptions.Item label="缓存">{data?.cpu.cache}</ProDescriptions.Item>
+              <ProDescriptions.Item label="型号">
+                {data?.cpu.name}
+              </ProDescriptions.Item>
+              <ProDescriptions.Item label="核心数">
+                {data?.cpu.cores}
+              </ProDescriptions.Item>
+              <ProDescriptions.Item label="缓存">
+                {data?.cpu.cache}
+              </ProDescriptions.Item>
               <ProDescriptions.Item label="使用率" valueType="percent">
                 {data?.cpu.usage}
               </ProDescriptions.Item>
@@ -112,16 +122,22 @@ export default () => {
               </ProDescriptions.Item>
             </ProDescriptions>
           </ProCard>
-          <ProCard colSpan={6} bodyStyle={{textAlign: 'center'}}>
-            <Progress type="dashboard" size={135} percent={parseFloat(data?.cpu.usage as string)} strokeColor={colors}/>
+          <ProCard colSpan={6} bodyStyle={{ textAlign: "center" }}>
+            <ApexRadial
+              dataColors={["#00b96b", "#ffe58f", "#fa541c"]}
+              label="CPU使用率"
+              percent={Number(data?.cpu.usage)}
+              height={300}
+            />
+            {/*<Progress type="dashboard" size={135} percent={parseFloat(data?.cpu.usage as string)} strokeColor={colors}/>*/}
           </ProCard>
         </ProCard>
         <ProCard gutter={[16, 0]} loading={loading}>
-          <ProCard colSpan={18} bodyStyle={{padding: 0}}>
+          <ProCard colSpan={18} bodyStyle={{ padding: 0 }}>
             <ProDescriptions
               className="custom-description-label-width-fixed-300"
               size="small"
-              column={2}
+              column={1}
               title="内存信息"
               bordered
               params={data?.memory}
@@ -133,40 +149,46 @@ export default () => {
               }}
               columns={[
                 {
-                  title: '总内存',
-                  dataIndex: 'total',
+                  title: "总内存",
+                  dataIndex: "total",
                   render: (text) => `${text}G`,
                 },
                 {
-                  title: '已使用内存',
-                  dataIndex: 'usage',
+                  title: "已使用内存",
+                  dataIndex: "usage",
                   render: (text) => `${text}G`,
                 },
                 {
-                  title: 'PHP使用内存',
-                  dataIndex: 'php',
+                  title: "PHP使用内存",
+                  dataIndex: "php",
                   render: (text) => `${text}M`,
                 },
                 {
-                  title: '空闲内存',
-                  dataIndex: 'free',
+                  title: "空闲内存",
+                  dataIndex: "free",
                   render: (text) => `${text}G`,
                 },
                 {
-                  title: '使用率',
-                  dataIndex: 'rate',
-                  valueType: 'percent',
+                  title: "使用率",
+                  dataIndex: "rate",
+                  valueType: "percent",
                 },
               ]}
             />
           </ProCard>
-          <ProCard colSpan={6} bodyStyle={{textAlign: 'center'}}>
-            <Progress type="dashboard" size={135} percent={parseFloat(data?.memory.rate as string)}
-                      strokeColor={colors}/>
+          <ProCard colSpan={6} bodyStyle={{ textAlign: "center" }}>
+            <ApexRadial
+              dataColors={["#00b96b", "#ffe58f", "#fa541c"]}
+              label="内存使用率"
+              percent={Number(data?.memory.rate)}
+              height={300}
+            />
+            {/*<Progress type="dashboard" size={135} percent={parseFloat(data?.memory.rate as string)}*/}
+            {/*          strokeColor={colors}/>*/}
           </ProCard>
         </ProCard>
         <ProCard gutter={[16, 0]} loading={loading}>
-          <ProCard colSpan={24} bodyStyle={{padding: 0}}>
+          <ProCard colSpan={24} bodyStyle={{ padding: 0 }}>
             <ProDescriptions
               className="custom-description-label-width-fixed-300"
               size="small"
@@ -177,54 +199,54 @@ export default () => {
               request={async () => {
                 return Promise.resolve({
                   success: true,
-                  data: {...data?.phpenv, ...data?.disk},
+                  data: { ...data?.phpenv, ...data?.disk },
                 });
               }}
               columns={[
                 {
-                  title: '操作系统',
-                  dataIndex: 'os',
+                  title: "操作系统",
+                  dataIndex: "os",
                 },
                 {
-                  title: 'PHP版本',
-                  dataIndex: 'php_version',
+                  title: "PHP版本",
+                  dataIndex: "php_version",
                 },
                 {
-                  title: 'Swoole版本',
-                  dataIndex: 'swoole_version',
+                  title: "Swoole版本",
+                  dataIndex: "swoole_version",
                 },
                 {
-                  title: 'Hyperf版本',
-                  dataIndex: 'hyperf_version',
+                  title: "Hyperf版本",
+                  dataIndex: "hyperf_version",
                 },
                 {
-                  title: 'Core版本',
-                  dataIndex: 'msproadmin_version',
+                  title: "Core版本",
+                  dataIndex: "msproadmin_version",
                 },
                 {
-                  title: '系统物理路径',
-                  dataIndex: 'project_path',
+                  title: "系统物理路径",
+                  dataIndex: "project_path",
                 },
                 {
-                  title: '系统启动时间',
-                  dataIndex: 'start_time',
+                  title: "系统启动时间",
+                  dataIndex: "start_time",
                 },
                 {
-                  title: '系统运行时间',
-                  dataIndex: 'run_time',
+                  title: "系统运行时间",
+                  dataIndex: "run_time",
                 },
                 {
-                  title: '磁盘信息',
-                  dataIndex: 'rate',
+                  title: "磁盘信息",
+                  dataIndex: "rate",
                   span: 2,
                   render: (_, record) => (
                     <Space>
                       <span>总空间：{record.total}</span>
-                      <Divider type="vertical"/>
+                      <Divider type="vertical" />
                       <span>已使用：{record.usage}</span>
-                      <Divider type="vertical"/>
+                      <Divider type="vertical" />
                       <span>已剩余：{record.free}</span>
-                      <Divider type="vertical"/>
+                      <Divider type="vertical" />
                       <span>使用率：{record.rate}</span>
                     </Space>
                   ),

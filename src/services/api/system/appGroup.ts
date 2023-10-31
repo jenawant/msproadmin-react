@@ -1,21 +1,20 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 /**
  * 应用分组 API JS
  */
 
 export default {
-
   /**
    * 获取应用分组分页列表
    * @returns
    */
   getList(params = {}) {
     return request({
-      url: 'system/appGroup/index',
-      method: 'get',
-      params
-    })
+      url: "system/appGroup/index",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -24,10 +23,10 @@ export default {
    */
   getSelectList(params = {}) {
     return request({
-      url: 'system/appGroup/list',
-      method: 'get',
-      params
-    })
+      url: "system/appGroup/list",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -36,10 +35,10 @@ export default {
    */
   getRecycleList(params = {}) {
     return request({
-      url: 'system/appGroup/recycle',
-      method: 'get',
-      params
-    })
+      url: "system/appGroup/recycle",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -48,10 +47,10 @@ export default {
    */
   save(data = {}) {
     return request({
-      url: 'system/appGroup/save',
-      method: 'post',
-      data
-    })
+      url: "system/appGroup/save",
+      method: "post",
+      data,
+    });
   },
 
   /**
@@ -60,10 +59,10 @@ export default {
    */
   read(data = {}) {
     return request({
-      url: 'system/appGroup/read',
-      method: 'post',
-      data
-    })
+      url: "system/appGroup/read",
+      method: "post",
+      data,
+    });
   },
 
   /**
@@ -72,10 +71,10 @@ export default {
    */
   deletes(data: any) {
     return request({
-      url: 'system/appGroup/delete',
-      method: 'delete',
-      data
-    })
+      url: "system/appGroup/delete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -84,10 +83,10 @@ export default {
    */
   recoverys(data: any) {
     return request({
-      url: 'system/appGroup/recovery',
-      method: 'put',
-      data
-    })
+      url: "system/appGroup/recovery",
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -96,10 +95,10 @@ export default {
    */
   realDeletes(data: any) {
     return request({
-      url: 'system/appGroup/realDelete',
-      method: 'delete',
-      data
-    })
+      url: "system/appGroup/realDelete",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -108,10 +107,10 @@ export default {
    */
   update(id: number, data = {}) {
     return request({
-      url: 'system/appGroup/update/' + id,
-      method: 'put',
-      data
-    })
+      url: "system/appGroup/update/" + id,
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -120,10 +119,9 @@ export default {
    */
   changeStatus(data = {}) {
     return request({
-      url: 'system/appGroup/changeStatus',
-      method: 'put',
-      data
-    })
+      url: "system/appGroup/changeStatus",
+      method: "put",
+      data,
+    });
   },
-
-}
+};

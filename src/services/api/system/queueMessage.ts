@@ -1,17 +1,16 @@
-import { request } from '../../request';
+import { request } from "@/services/request";
 
 export default {
-
   /**
    * 获取接收消息列表
    * @returns
    */
   getReceiveList(params = {}) {
     return request({
-      url: 'system/queueMessage/receiveList',
-      method: 'get',
-      params
-    })
+      url: "system/queueMessage/receiveList",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -20,10 +19,10 @@ export default {
    */
   getSendList(params = {}) {
     return request({
-      url: 'system/queueMessage/sendList',
-      method: 'get',
-      params
-    })
+      url: "system/queueMessage/sendList",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -32,10 +31,10 @@ export default {
    */
   getReceiveUser(params = {}) {
     return request({
-      url: 'system/queueMessage/getReceiveUser',
-      method: 'get',
-      params
-    })
+      url: "system/queueMessage/getReceiveUser",
+      method: "get",
+      params,
+    });
   },
 
   /**
@@ -44,10 +43,10 @@ export default {
    */
   deletes(data = {}) {
     return request({
-      url: 'system/queueMessage/deletes',
-      method: 'delete',
-      data
-    })
+      url: "system/queueMessage/deletes",
+      method: "delete",
+      data,
+    });
   },
 
   /**
@@ -56,10 +55,10 @@ export default {
    */
   updateReadStatus(data = {}) {
     return request({
-      url: 'system/queueMessage/updateReadStatus',
-      method: 'put',
-      data
-    })
+      url: "system/queueMessage/updateReadStatus",
+      method: "put",
+      data,
+    });
   },
 
   /**
@@ -68,9 +67,9 @@ export default {
    */
   sendPrivateMessage(data = {}) {
     return request({
-      url: 'system/queueMessage/sendPrivateMessage',
-      method: 'post',
-      data
-    })
+      url: "system/queueMessage/sendPrivateMessage",
+      method: "post",
+      data,
+    });
   },
-}
+};
