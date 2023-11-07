@@ -1516,7 +1516,7 @@ export default () => {
                             </Divider>
                             <ProFormSelect
                               colProps={{ span: 8 }}
-                              name="tree_id"
+                              name={["options", "tree_id"]}
                               label="树主ID"
                               placeholder="请选择树主ID"
                               rules={[
@@ -1543,7 +1543,7 @@ export default () => {
                             />
                             <ProFormSelect
                               colProps={{ span: 8 }}
-                              name="tree_parent_id"
+                              name={["options", "tree_pid"]}
                               label="树父ID"
                               placeholder="请选择树父ID"
                               rules={[
@@ -1570,7 +1570,7 @@ export default () => {
                             />
                             <ProFormSelect
                               colProps={{ span: 8 }}
-                              name="tree_name"
+                              name={["options", "tree_name"]}
                               label="树名称"
                               placeholder="请选择树名称"
                               rules={[
